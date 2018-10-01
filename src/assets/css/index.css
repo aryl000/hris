@@ -8,11 +8,16 @@ body {
   background-color: #fff
 }
 
+#root {
+  height: 100%
+}
+
 .register-background {
   background-image: url("../img/Tokopedia-Regist.jpg");
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
+  height: 100% ;
 }
 
 #logo1 {

@@ -6,6 +6,7 @@ import Ops_Form_Response from 'views/Ops_Form_Response/Ops_Form_Response';
 import Rejected_Candidates from 'views/Rejected_Candidates/Rejected_Candidates';
 import Recruiter from 'views/Recruiter/Recruiter';
 import Survey from 'views/Survey/SurveyIndex';
+import NotFound from 'views/Error/NotFound.jsx';
 
 const appRoutes = [
     { path: "/dashboard", name: "Dashboard", icon: "pe-7s-graph", component: Dashboard },
@@ -15,8 +16,9 @@ const appRoutes = [
     { path: "/Ops_Form_Response", name: "Ops Form", icon: "pe-7s-note2", component: Ops_Form_Response },
     { path: "/Rejected_Candidates", name: "Rejected", icon: "pe-7s-delete-user", component: Rejected_Candidates },
     { path: "/Recruiter", name: "Recruiter", icon: "pe-7s-headphones", component: Recruiter },
-    { path: "/Survey", name: "Survey", icon: "pe-7s-file", component: Survey },    
-    { redirect: true, path: "/", to: "/dashboard", name: "dashboard" }
+    { path: "/Survey", name: "Survey", icon: "pe-7s-file", component: Survey },
+    { path: "*", component: NotFound },
+    // { redirect: true, path: "/:filter?", to: "/dashboard", name: "dashboard" }
 ];
 
 export default appRoutes;

@@ -11,6 +11,7 @@ import {
     Bcolor,
 } from 'variables/Variables.jsx';
 
+
 const option = {
     scales: {
         xAxes: [{
@@ -43,6 +44,7 @@ class Dashboard extends Component {
         super();
         this.change = this.change.bind(this);
         this.state = {
+            query: "?year=all&type=all",
             schoolF: "all",
             positionF: "all",
             totalCandidate: null,
@@ -123,18 +125,36 @@ class Dashboard extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.location.search !== prevProps.location.search) {
+            this.setState({
+                query: this.props.location.search,
+            })
+            this.chartData()
+        }
+    }
+
     componentDidMount() {
+
+
+        // console.log("ini di dashboard ", 'http://0.0.0.0:8080/nonopsform/view/total'+ this.props.location.search)
+
+        this.chartData()
+    }
+
+
+    chartData() {
         //Total----------------------------------------------------------------------
-        axios.get(`http://0.0.0.0:8080/nonopsform/view/total`).then(res => {
+        axios.get(`http://0.0.0.0:8080/nonopsform/view/total` + this.props.location.search).then(res => {
             var Total = []
             var Success = []
             var Reject = []
             var Progress = []
             res.data.forEach(function (item) {
                 Total.push(item.total)
-                    Success.push(item.approved);
-                    Reject.push(item.reject);
-                    Progress.push(item.onprogress);
+                Success.push(item.approved);
+                Reject.push(item.reject);
+                Progress.push(item.onprogress);
             })
             this.setState({
                 totalCandidate: Total,
@@ -146,15 +166,16 @@ class Dashboard extends Component {
 
 
         //school--------------------------------------------------------------------------------
-        axios.get(`http://0.0.0.0:8080/nonopsform/view/schoolpie`).then(res => {
+        axios.get(`http://0.0.0.0:8080/nonopsform/view/schoolpie` + this.props.location.search).then(res => {
 
             var Labels = [];
             var Series = [];
-
-            res.data.forEach(function (item) {
-                Labels.push(item.labels)
-                Series.push(item.series)
-            })
+            if (res.data !== null) {
+                res.data.forEach(function (item) {
+                    Labels.push(item.labels)
+                    Series.push(item.series)
+                })
+            }
 
 
             this.setState({
@@ -170,16 +191,17 @@ class Dashboard extends Component {
 
 
         //job information----------------------------------------------------------------------
-        axios.get(`http://0.0.0.0:8080/nonopsform/view/jobpie`).then(res => {
+        axios.get(`http://0.0.0.0:8080/nonopsform/view/jobpie` + this.props.location.search).then(res => {
 
             var Labels = [];
             var Series = [];
 
-            res.data.forEach(function (item) {
-                Labels.push(item.labels)
-                Series.push(item.series)
-
-            })
+            if (res.data !== null) {
+                res.data.forEach(function (item) {
+                    Labels.push(item.labels)
+                    Series.push(item.series)
+                })
+            }
 
             this.setState({
                 datapieJob: {
@@ -193,15 +215,16 @@ class Dashboard extends Component {
 
 
         // Position applicant-----------------------------------------------------------------------------
-        axios.get(`http://0.0.0.0:8080/nonopsform/view/posbar`).then(res => {
+        axios.get(`http://0.0.0.0:8080/nonopsform/view/posbar` + this.props.location.search).then(res => {
             var Labels = [];
             var Series = [];
 
-            res.data.forEach(function (item) {
-                Labels.push(item.labels)
-                Series.push(item.series)
-
-            })
+            if (res.data !== null) {
+                res.data.forEach(function (item) {
+                    Labels.push(item.labels)
+                    Series.push(item.series)
+                })
+            }
 
             this.setState({
                 databarPos: {
@@ -216,7 +239,7 @@ class Dashboard extends Component {
 
 
         // Recruitment per Contact Person-----------------------------------------------------
-        axios.get(`http://0.0.0.0:8080/nonopsform/view/cpbar`).then(res => {
+        axios.get(`http://0.0.0.0:8080/nonopsform/view/cpbar` + this.props.location.search).then(res => {
             var Labels = [];
             var noStatus = [];
             var reject = [];
@@ -229,19 +252,21 @@ class Dashboard extends Component {
             var holdRejected = [];
             var closed = []
 
-            res.data.forEach(function (item) {
-                Labels.push(item.labels)
-                noStatus.push(item.nostatus)
-                reject.push(item.reject)
-                Approved.push(item.approved)
-                onProgress.push(item.onprogress)
-                offeringAccept.push(item.offeringAccepted)
-                offeringDecline.push(item.offeringDeclined)
-                offeringCancel.push(item.offeringCancel)
-                holds.push(item.holds)
-                holdRejected.push(item.holdsReject)
-                closed.push(item.closed)
-            })
+            if (res.data !== null) {
+                res.data.forEach(function (item) {
+                    Labels.push(item.labels)
+                    noStatus.push(item.nostatus)
+                    reject.push(item.reject)
+                    Approved.push(item.approved)
+                    onProgress.push(item.onprogress)
+                    offeringAccept.push(item.offeringAccepted)
+                    offeringDecline.push(item.offeringDeclined)
+                    offeringCancel.push(item.offeringCancel)
+                    holds.push(item.holds)
+                    holdRejected.push(item.holdsReject)
+                    closed.push(item.closed)
+                })
+            }
             this.setState({
                 databarCP: {
                     labels: Labels,
@@ -312,7 +337,7 @@ class Dashboard extends Component {
 
 
         // Status of applicant---------------------------------------------------------------
-        axios.get(`http://0.0.0.0:8080/nonopsform/view/statbar`).then(res => {
+        axios.get(`http://0.0.0.0:8080/nonopsform/view/statbar` + this.props.location.search).then(res => {
             var Series = [];
 
             res.data.forEach(function (item) {
@@ -332,15 +357,16 @@ class Dashboard extends Component {
 
 
         // Stat Final information-------------------------------------------------------------
-        axios.get(`http://0.0.0.0:8080/nonopsform/view/statpie`).then(res => {
+        axios.get(`http://0.0.0.0:8080/nonopsform/view/statpie` + this.props.location.search).then(res => {
             var Labels = [];
             var Series = [];
 
-            res.data.forEach(function (item) {
-                Labels.push(item.labels)
-                Series.push(item.series)
-
-            })
+            if (res.data !== null) {
+                res.data.forEach(function (item) {
+                    Labels.push(item.labels)
+                    Series.push(item.series)
+                })
+            }
 
             this.setState({
                 datapieStat: {
@@ -352,8 +378,6 @@ class Dashboard extends Component {
             })
 
         })
-
-
     }
 
     change(e) {
@@ -376,12 +400,12 @@ class Dashboard extends Component {
                 json: true
             };
             axios(schoolF)
-            .then(function (response) {
-                console.log(response.status, "success");
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(function (response) {
+                    console.log(response.status, "success");
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
 
         else if ([e.target.name] == "positionF") {
@@ -399,15 +423,15 @@ class Dashboard extends Component {
                 json: true
             };
             axios(positionF)
-            .then(function (response) {
-                console.log(response.status, "success");
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(function (response) {
+                    console.log(response.status, "success");
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
 
-        this.props.history.push("/");
+        this.props.history.push("/dashboard");
     };
 
 
@@ -467,7 +491,7 @@ class Dashboard extends Component {
                                 content={
 
                                     <div id="chartPreferences" className="ct-chart ct-perfect-fourth">
-                                        <span className= "span-card">&nbsp; School Show</span>
+                                        <span className="span-card">&nbsp; School Show</span>
                                         <select name="schoolF" id="schoolDash" value={this.state.schoolF} onChange={e => this.change(e)}>
                                             <option value="all" disabled>-</option>
                                             <option value="5">Top 5</option>
@@ -519,8 +543,8 @@ class Dashboard extends Component {
                                     <div id="chartPreferences" className="ct-chart ct-perfect-fourth">
                                         <span className="span-card">&nbsp; Position Show</span>
                                         <select name="positionF" id="schoolDash" value={this.state.positionF} onChange={e => this.change(e)}>
-                                            <option value="all" disabled>-</option>  
-                                            <option value="1">TOP 25</option>                                                                    
+                                            <option value="all" disabled>-</option>
+                                            <option value="1">TOP 25</option>
                                             <option value="0">A-C</option>
                                             <option value="25">C-D</option>
                                             <option value="50">D-F</option>
@@ -528,7 +552,7 @@ class Dashboard extends Component {
                                             <option value="100">I-M</option>
                                             <option value="125">M-P</option>
                                             <option value="150">R-S</option>
-                                            <option value="175">S-Z</option>                                            
+                                            <option value="175">S-Z</option>
                                         </select>
                                         <HorizontalBar
                                             data={this.state.databarPos}

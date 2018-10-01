@@ -47,36 +47,33 @@ class Main extends Component {
         document.title = "PT.Tokopedia - Admin HR Page"
         
         return (
-            <div>
-                <div>
-                
-                    <Grid>
-                        <Row className="show-grid">
-                            <Col xs={12} md={6}>
-                                <div className = "wrapper-form">
-                                    <div id="logo1">
-                                        <img src={require('../assets/img/logo1.png')} alt="logo" id="logoIn" draggable="false"/>
-                                    </div>
-                                    <div className= "containerRegist-wrapper">
-                                        <div className="containerRegist">
-                                            <h1>WELCOME TO PT.TOKOPEDIA</h1>
-                                            <h3 style={{ color: "red", textAlign: "center",  fontWeight:"bold" }}>please press Sign In button to enter the Dashboard</h3>
-                                                <div style= {{paddingBottom: 40}}>
-                                                    <GoogleLogin
-                                                        clientId="667718253087-qeek1sjq841eo473bi8sqq64evqo16ss.apps.googleusercontent.com"
-                                                        onSuccess={responseGoogle}
-                                                        onFailure={responseGoogle}
-                                                        className="g-signin2"
-                                                        style={{ position: "relative", top: 10, left: 240, }}
-                                                    />
-                                                </div>
-                                        </div>
+            <div className="register-background">
+                <Grid>
+                    <Row className="show-grid">
+                        <Col xs={12} md={6}>
+                            <div className = "wrapper-form">
+                                <div id="logo1">
+                                    <img src={require('../assets/img/logo1.png')} alt="logo" id="logoIn" draggable="false"/>
+                                </div>
+                                <div className= "containerRegist-wrapper">
+                                    <div className="containerRegist">
+                                        <h1>WELCOME TO PT.TOKOPEDIA</h1>
+                                        <h3 style={{ color: "red", textAlign: "center",  fontWeight:"bold" }}>please press Sign In button to enter the Dashboard</h3>
+                                            <div style= {{paddingBottom: 40}}>
+                                                <GoogleLogin
+                                                    clientId="667718253087-qeek1sjq841eo473bi8sqq64evqo16ss.apps.googleusercontent.com"
+                                                    onSuccess={responseGoogle}
+                                                    onFailure={responseGoogle}
+                                                    className="g-signin2"
+                                                    style={{ position: "relative", top: 10, left: 240, }}
+                                                />
+                                            </div>
                                     </div>
                                 </div>
-                            </Col>
-                        </Row>
-                    </Grid>
-                 </div>
+                            </div>
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
         )
     }

@@ -32,7 +32,7 @@ class Sidebar extends Component {
         return (
             <div id="sidebar" className="sidebar" data-color="black" data-image={image}>
                 <div className="sidebar-background" style={sidebarBackground}></div>
-                <div className="logo" style={{ paddingBottom: 75, backgroundColor: "rgba(244, 244, 244, 0.96)", "border-right": "1px solid rgba(0, 0, 0, 0.1)" }}>
+                <div className="logo" style={{ paddingBottom: 75, backgroundColor: "rgba(244, 244, 244, 0.96)", borderRight: "1px solid rgba(0, 0, 0, 0.1)" }}>
                     <a href="https://www.tokopedia.com" target="_blank" rel="noopener noreferrer" className="simple-text logo-mini" >
                         <div className="logo-img" style={{ position: "relative", bottom: 15 }} >
                             <img src={logo} alt="logo_image" style={{ height: 80, width: 210 }} />

@@ -11,6 +11,7 @@ import Sidebar from 'components/Sidebar/Sidebar';
 import { style } from "variables/Variables.jsx";
 import appRoutes from 'routes/app.jsx';
 import Cookies from 'js-cookie';
+import Dashboard from 'views/Dashboard/Dashboard';
 
 var name = {
     username: Cookies.get("__hrnu")
@@ -76,10 +77,11 @@ class App extends Component {
                             <Switch>
                                 {
                                     appRoutes.map((prop, key) => {
-                                        if (prop.redirect)
+                                        if (window.location.pathname === '/') {
                                             return (
-                                                <Redirect from={prop.path} to={prop.to} key={key} />
+                                                <Redirect path='/' to='/dashboard' component={Dashboard} key={key} />
                                             );
+                                        }
                                         return (
                                             <Route path={prop.path} component={prop.component} key={key} />
                                         );
