@@ -25,6 +25,11 @@ in Folder Clvin:
 ```
 
 ### For Hris
+```
+1. Run [npm install] to install the dependencies in Hris folder. If you don't have [npm]
+install npm first optional you can install yarn
 
-1. Run `npm install` to install the dependencies in Hris folder. If you don't have [npm]
-install npm first 
+2. Run [npm run-script start-webpack] || [yarn start-webpack] to start Hris
+
+3. Go to [localhost:3000] and you should see the app running in development!
+```
