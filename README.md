@@ -15,11 +15,11 @@ A step by step how to get a development env running:
 ### For Clvin
 in Folder Clvin:
 ```
-1. Run `dep ensure` to install the dependencies. If you don't have [dep](https://github.com/golang/dep), install using homebrew etc.
+1. Run [dep ensure] to install the dependencies. If you don't have [dep](https://github.com/golang/dep), install using homebrew etc.
 
-2. Run `go build` and then ./<your-project-name> to start the local web server.
+2. Run [go build] and then ./<your-project-name> to start the local web server.
 
-3. Run `go run app.go` to start clvin
+3. Run [go run app.go] to start clvin
 
 4. Server will run in `http://0.0.0.0:8080` and you should see the app running!
 ```
