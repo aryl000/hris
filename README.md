@@ -1,4 +1,4 @@
-# Nakaapp Registration HR Tokopedia
+😀# Nakaapp Registration HR Tokopedia
 
 Tokopedia Registration Project has separate into two folder: 
 `Clvin using golang` and `Hris using reactjs`
